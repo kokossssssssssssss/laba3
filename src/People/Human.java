@@ -186,19 +186,7 @@ public abstract class Human {
         }//проверка, что когда человек висит на дереве он должен держаться хотябы одной рукой за ствол или за ветку, иначе упадет
     }
 
-    public void jump(int x, int y) {
-        if (x > this.x && y > this.y) System.out.println("прыгнул вперед и вверх");
-        else if (x == this.x && y == this.y) System.out.println("остался на месте");
-        else if (x > this.x && y < this.y) System.out.println("прыгнул вперед и вниз");
-        else if (x < this.x && y > this.y) System.out.println("прыгнул назад и вверх");
-        else if (x < this.x && y < this.y) System.out.println("прыгнул назад и вниз");
-        else if (x == this.x && y < this.y) System.out.println("прыгнул вниз");
-        else if (x == this.x && y > this.y) System.out.println("прыгнул вверх");
-        else if (x > this.x && y == this.y) System.out.println("прыгнул вперед");
-        else if (x < this.x && y == this.y) System.out.println("прыгнул назад");
-        this.x = x;
-        this.y = y;
-    }
+    
 
     public void see(Thing thing) {
         System.out.println(name + " увидел " + thing.getTitle());
