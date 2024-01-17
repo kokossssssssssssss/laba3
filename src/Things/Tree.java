@@ -10,10 +10,10 @@ public class Tree extends Thing{
         super.setX(x);
     }
     {
-       super.title = "дерево";
-       Trunk trunk = new Trunk();
-       trunk.setX(this.getX());
-       setTrunk(trunk);
+        super.title = "дерево";
+        Trunk trunk = new Trunk();
+        trunk.setX(this.getX());
+        setTrunk(trunk);
     }
 
     public Trunk getTrunk() {
@@ -23,13 +23,12 @@ public class Tree extends Thing{
         this.trunk = trunk;
     }
 
-    private int height;
+    private final int height;
 
 
 
     private Trunk trunk;
-    private ArrayList<Twig> twigs = new ArrayList<>();//список, содержащий все ветки дерева
-
+    private final ArrayList<Twig> twigs = new ArrayList<>();//список, содержащий все ветки дерева
     public int getHeight() {
         return height;
     }
@@ -48,16 +47,11 @@ public class Tree extends Thing{
     public void checkHeightOfTwig (Twig twig) throws HeightOfTreeException {//проверяем, чтобы высота ветки не превышала высоту дерева
         if  (twig.getHeight() > this.height) throw new HeightOfTreeException();
     }
-    public ArrayList<Twig> getTwigs(){
-        return this.twigs;
-    }
-    public int getNumOfTwigs(){//метод возвращает количество веток, исходя из количества элементов в списке twigs
-        return twigs.size();
-    }
-    public class Trunk extends Thing{
+
+    public static class Trunk extends Thing{
         {
             super.title = "ствол";
-            super.getX();
+
         }
     }
     public static class Twig extends Thing{
@@ -70,8 +64,8 @@ public class Tree extends Thing{
         {
             super.title = "ветка";
         }
-        private int height;
-        private int length;
+        private final int height;
+        private final int length;
 
         public int getLength() {
             return length;

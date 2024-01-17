@@ -7,7 +7,6 @@ import Exceptions.CoordsException;
 import Exceptions.DontSeeException;
 import Exceptions.HandIsBusyException;
 import Interfaces.Wearable;
-import Things.Fence;
 import Things.Thing;
 import Things.Tree;
 
@@ -16,10 +15,10 @@ import java.util.ArrayList;
 public abstract class Human {
     private String name;
     private Gender gender;
-    private ArrayList<String> feelings = new ArrayList<>();
-    private ArrayList<Wearable> clothes = new ArrayList<>();
-    private Hand[] hands;
-    private Brain brain;
+    private final ArrayList<String> feelings = new ArrayList<>();
+    private final ArrayList<Wearable> clothes = new ArrayList<>();
+    private final Hand[] hands;
+    private final Brain brain;
     private int x;
     private int y;
 
@@ -42,9 +41,7 @@ public abstract class Human {
         this.gender = gender;
     }
 
-    public Gender getGender() {
-        return this.gender;
-    }
+
 
     public void feelTired() {
         if (!feelings.contains("уставший")) {
@@ -63,21 +60,8 @@ public abstract class Human {
             feelings.add("удивленный");
         }
     }
-
-    public ArrayList<String> getFeelings() {
-        return this.feelings;
-    }
-
-    public void setBrain(Brain brain) {
-        this.brain = brain;
-    }
-
     public Brain getBrain() {
         return this.brain;
-    }
-
-    public void setHand(Hand[] hands) {
-        this.hands = hands;
     }
 
     public Hand[] getHand() {
@@ -154,8 +138,9 @@ public abstract class Human {
     }// переопределяем метод для взятия ствола дерева; чтобы его взять, нужно проверить только X
 
     public void checkIfSee(Thing thing) throws DontSeeException {//проверить, что человек увидел вещь перед тем, как ее взять
-        if (getBrain().getThoughts().contains(thing.getTitle())) {
-        } else throw new DontSeeException();
+        if (!getBrain().getThoughts().contains(thing.getTitle())) {
+           throw new DontSeeException();
+        }
     }
 
     public void checkCoordX(Thing thing) throws CoordsException {//проверить, чтобы координаты x человека и вещи совпадали, перед тем как взять вещь
@@ -183,10 +168,10 @@ public abstract class Human {
                 this.y = 0;
 
             }
-        }//проверка, что когда человек висит на дереве он должен держаться хотябы одной рукой за ствол или за ветку, иначе упадет
+        }//проверка, что когда человек висит на дереве он должен держаться хотя бы одной рукой за ствол или за ветку, иначе упадет
     }
 
-    
+
 
     public void see(Thing thing) {
         System.out.println(name + " увидел " + thing.getTitle());
@@ -198,7 +183,7 @@ public abstract class Human {
         return "Человек{" +
                 "Имя: '" + name +
                 "', Пол: '" + this.gender +
-                "', Состояние: '" + feelings.toString() +
+                "', Состояние: '" + feelings +
                 "', Местоположение: x = '" + getX() + "', y = '" + getY() + "'}";
     }
 
@@ -219,7 +204,7 @@ public abstract class Human {
             this.side = side;
         }
 
-        private Side side;
+        private final Side side;
         private Thing thing;
         private Status status = Status.WARM;
 
@@ -251,7 +236,7 @@ public abstract class Human {
         }//проверяет, пустая ли рука
 
         public void checkHandIsBusy(Thing thing) throws HandIsBusyException {
-            if (this.thing.getTitle() != thing.getTitle()) throw new HandIsBusyException();
+            if (!this.thing.getTitle().equals(thing.getTitle())) throw new HandIsBusyException();
         }//проверяет, есть ли в руке вещь
 
         public void release(Thing thing) {
@@ -265,9 +250,8 @@ public abstract class Human {
         }//отпустить объект, если он есть в руке
     }
 
-    private class Brain {
-        String owner = name;
-        private ArrayList<String> thoughts = new ArrayList<>();// массив мыслей человека
+    public static class Brain {
+        private final ArrayList<String> thoughts = new ArrayList<>();// массив мыслей человека
 
         public void setThoughts(String thought) {
             if (!this.thoughts.contains(thought)) {

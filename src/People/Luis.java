@@ -6,13 +6,10 @@ import Exceptions.OutOfTwigException;
 import Exceptions.ShoesException;
 import Interfaces.CrowlingOnATree;
 import Phenomenons.Shadow;
-import Things.Car;
-import Things.Shoes;
-import Things.Thing;
-import Things.Tree;
+import Things.*;
 
 public class Luis extends Human implements CrowlingOnATree {
-    private boolean isHanging;
+
 
     {
         super.setName("Льюис");
@@ -26,7 +23,11 @@ public class Luis extends Human implements CrowlingOnATree {
             think("О Господи, машина едет!");
             feelScared();
             System.out.println(getName() + " увидел полицейскую машину");//если Льюис видит полицейскую машину, то пугается
-        } else {
+        }
+        if(thing.getClass().equals(Fence.class)){
+            think("О нет, острый забор!");
+            feelScared();
+        }else {
             think(thing.getTitle());
         }
     }
@@ -57,11 +58,9 @@ public class Luis extends Human implements CrowlingOnATree {
 
         if (getHand()[0].getThing() == null) take(tree.getTrunk(), getHand()[0]);
         if (getHand()[1].getThing() == null) take(tree.getTrunk(), getHand()[1]);
-        else if (getHand()[0].getThing().getTitle().equals(tree.getTrunk().getTitle()) && getHand()[1].getThing().getTitle().equals(tree.getTrunk().getTitle())) {
-
-        } else if (getHand()[0].getThing().getTitle().equals(tree.getTrunk().getTitle()) && getHand()[1].getThing().getTitle() != tree.getTrunk().getTitle()) {
+         else if (!getHand()[0].getThing().getTitle().equals(tree.getTrunk().getTitle()) && getHand()[1].getThing().getTitle().equals( tree.getTrunk().getTitle())) {
             take(tree.getTrunk(), getHand()[1]);
-        } else if (getHand()[0].getThing().getTitle() != tree.getTrunk().getTitle() && getHand()[1].getThing().getTitle().equals(tree.getTitle())) {
+        } else if (!getHand()[0].getThing().getTitle().equals(tree.getTrunk().getTitle()) && getHand()[1].getThing().getTitle().equals(tree.getTitle())) {
             take(tree.getTrunk(), getHand()[0]);
         } else {
             take(tree.getTrunk(), getHand()[0]);
@@ -86,26 +85,11 @@ public class Luis extends Human implements CrowlingOnATree {
         for (int i = 0; i < getClothes().size(); i++) {
             if (getClothes().get(i).getClass().equals(Shoes.class)) {
                 ifContainsShoes = true;
+                break;
             }
         }
         if (!ifContainsShoes) throw new ShoesException();
     }
-
-
-    @Override
-    public void whereHang(Tree tree) {//метод определяет на какой вектке висит Льюис, сравнивая координату Льюиса и высоту ветки
-        think("Это было в 12 лет...");
-        int x = 0;
-        for (int i = 0; i < tree.getTwigs().size(); i++) {
-            if (getY() == tree.getTwigs().get(i).getHeight()) {
-                x = i + 1;
-            }
-        }
-        if (x == 3) System.out.print(getName() + " висит на " + x + "ей ветке");
-        else if (x == 0) System.out.println(getName() + " не висит на ветке");
-        else System.out.println(getName() + " висит на " + x + "ой ветке");
-    }
-
     @Override
     public void crowlOnTwig(Tree.Twig twig, int distance) {//льюис может передвигаться в горизонтальном направлении по ветке
         try {
@@ -115,16 +99,17 @@ public class Luis extends Human implements CrowlingOnATree {
             System.err.println("проверьте длину ветки, она слишком короткая");
             System.exit(0);
         }
+
         if (getHand()[0].getThing() == null){
             take(twig, getHand()[0]);
         }if (getHand()[1].getThing() == null){
             take(twig, getHand()[1]);
         }
-        else if (getHand()[0].getThing().getTitle().equals(twig.getTitle()) && getHand()[1].getThing().getTitle().equals(twig.getTitle())) {
 
-        } else if (getHand()[0].getThing().getTitle().equals(twig.getTitle()) && getHand()[1].getThing().getTitle() != twig.getTitle() || getHand()[0].getThing().getTitle().equals(twig.getTitle()) && getHand()[1].getThing().getTitle() == null) {
+
+         else if (getHand()[0].getThing().getTitle().equals(twig.getTitle()) && !getHand()[1].getThing().getTitle().equals(twig.getTitle()) || getHand()[0].getThing().getTitle().equals(twig.getTitle()) && getHand()[1].getThing().getTitle() == null) {
             take(twig, getHand()[1]);
-        } else if (getHand()[0].getThing().getTitle() != twig.getTitle() && getHand()[1].getThing().getTitle().equals(twig.getTitle()) || getHand()[0].getThing().getTitle() == null && getHand()[1].getThing().getTitle().equals(twig.getTitle())) {
+        } else if (!getHand()[0].getThing().getTitle().equals(twig.getTitle()) && getHand()[1].getThing().getTitle().equals(twig.getTitle()) || getHand()[0].getThing().getTitle() == null && getHand()[1].getThing().getTitle().equals(twig.getTitle())) {
             take(twig, getHand()[0]);
         } else {
             take(twig, getHand()[0]);

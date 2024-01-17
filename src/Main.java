@@ -1,12 +1,12 @@
-import Enums.Gender;
 import People.Luis;
 import People.Police;
 import Phenomenons.Wind;
 import Things.Car;
+import Things.Fence;
 import Things.Shoes;
 import Things.Tree;
 
-public class Main {
+public class Main {//не использовать system.out
     public static void main(String[] args) {
         Luis luis = new Luis();
         Shoes shoes = new Shoes();
@@ -32,7 +32,7 @@ public class Main {
         System.out.println(luis.getThoughts());//о чем думает
         luis.see(luis.makeShadow());//видит свою тень
         System.out.println(luis.getThoughts());//о чем думает
-        System.out.println(luis.toString());//удивился, когда увидел тень
+        System.out.println(luis);//удивился, когда увидел тень
         System.out.println(luis.getHand()[0].getStatus());
         System.out.println(luis.getHand()[1].getStatus());//состояние рук до ветра
         Wind wind = new Wind();
@@ -44,7 +44,13 @@ public class Main {
         Car car = new Car(police);//машина полицейских
         luis.see(car);
         System.out.println(luis.getThoughts());//о чем думает Льюис, когда увидел полицию
-        System.out.println(luis.toString());//состояние после того, как увидел полицию
+        System.out.println(luis);//состояние после того, как увидел полицию
+        Fence fence = new Fence(5);
+        luis.see(fence);
+
+
+
+
 
 
 
