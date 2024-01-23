@@ -1,12 +1,12 @@
-package People;
+package people;
 
-import Enums.Gender;
-import Exceptions.HeightOfTreeException;
-import Exceptions.OutOfTwigException;
-import Exceptions.ShoesException;
-import Interfaces.CrowlingOnATree;
-import Phenomenons.Shadow;
-import Things.*;
+import enums.Gender;
+import exceptions.HeightOfTreeException;
+import exceptions.OutOfTwigException;
+import exceptions.ShoesException;
+import interfaces.CrowlingOnATree;
+import phenomenons.Shadow;
+import things.*;
 
 public class Luis extends Human implements CrowlingOnATree {
 
@@ -49,6 +49,7 @@ public class Luis extends Human implements CrowlingOnATree {
 
     @Override
     public void climbOnTree(Tree tree, int height) {
+
         try {
             checkHeightOfTree(tree, height);
         } catch (HeightOfTreeException e) {//проверяем, чтобы высота не превышала высоту дерева

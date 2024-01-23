@@ -1,6 +1,6 @@
-package Things;
+package things;
 
-import People.Human;
+import people.Human;
 
 public class Car extends Thing {
     private int number;
@@ -13,9 +13,8 @@ public class Car extends Thing {
     }
 
 
-    public void drive(int x, int y) {
+    public void drive(int x) {
         this.x = x;
-        this.y = y;
     }
 
 

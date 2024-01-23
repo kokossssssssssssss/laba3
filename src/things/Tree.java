@@ -1,6 +1,6 @@
-package Things;
+package things;
 
-import Exceptions.HeightOfTreeException;
+import exceptions.HeightOfTreeException;
 
 import java.util.ArrayList;
 

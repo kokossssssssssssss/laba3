@@ -1,5 +1,5 @@
-package Interfaces;
-import Things.Tree;
+package interfaces;
+import things.Tree;
 
 public interface CrowlingOnATree {
     void climbOnTree(Tree tree, int height);

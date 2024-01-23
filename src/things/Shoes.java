@@ -1,10 +1,10 @@
-package Things;
+package things;
 
-import Interfaces.Wearable;
+import interfaces.Wearable;
 
 public class Shoes extends Thing implements Wearable {
     {
-        super.title = "туфли";
+        super.title = "теннисные туфли";
     }
 
     @Override

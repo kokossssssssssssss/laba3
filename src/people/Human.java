@@ -1,14 +1,14 @@
-package People;
+package people;
 
-import Enums.Gender;
-import Enums.Side;
-import Enums.Status;
-import Exceptions.CoordsException;
-import Exceptions.DontSeeException;
-import Exceptions.HandIsBusyException;
-import Interfaces.Wearable;
-import Things.Thing;
-import Things.Tree;
+import enums.Gender;
+import enums.Side;
+import enums.Status;
+import exceptions.CoordsException;
+import exceptions.DontSeeException;
+import exceptions.HandIsBusyException;
+import interfaces.Wearable;
+import things.Thing;
+import things.Tree;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,6 @@ public abstract class Human {
         hands = new Hand[]{handL, handR};//массив из 2 рук
         brain = new Brain();//мозг
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -77,7 +76,11 @@ public abstract class Human {
     }
 
     public void setClothes(Wearable clothes) {
-        this.clothes.add(clothes);
+        try{
+            this.clothes.add(clothes);
+        }catch(ArrayStoreException e){
+            System.err.println("Это не одежда");
+        }
     }
 
     public ArrayList<Wearable> getClothes() {
@@ -199,7 +202,7 @@ public abstract class Human {
         return this.name.equals(o.name) && this.gender.equals(o.gender);
     }
 
-    public static class Hand {
+    public class Hand {
         public Hand(Side side) {
             this.side = side;
         }
@@ -250,7 +253,7 @@ public abstract class Human {
         }//отпустить объект, если он есть в руке
     }
 
-    public static class Brain {
+    public class Brain {
         private final ArrayList<String> thoughts = new ArrayList<>();// массив мыслей человека
 
         public void setThoughts(String thought) {

@@ -1,4 +1,4 @@
-package Phenomenons;
+package phenomenons;
 
 public class Shadow {
     private final String whoose;

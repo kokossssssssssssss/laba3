@@ -1,4 +1,4 @@
-package Things;
+package things;
 
 public abstract class Thing {
     protected String title;
